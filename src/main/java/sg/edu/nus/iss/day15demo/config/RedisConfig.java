@@ -11,6 +11,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import sg.edu.nus.iss.day15demo.utils.Util;
 
+// slide 17, 18 & 19
 @Configuration
 public class RedisConfig {
     
@@ -57,6 +58,17 @@ public class RedisConfig {
         template.setHashKeySerializer(new StringRedisSerializer());
         template.setHashValueSerializer(new StringRedisSerializer());
 
+        return template;
+    }
+
+    @Bean(Util.REDIS_TWO)
+    public RedisTemplate<String, Object> redisObjectTemplate() {
+
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
+        template.setConnectionFactory(jedisConnectionFactory());
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(new StringRedisSerializer());
+        
         return template;
     }
 }
